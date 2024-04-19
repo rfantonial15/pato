@@ -1,7 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { View, Text, TouchableOpacity, StyleSheet, StatusBar } from 'react-native';
+import ModalComponent from './components/start'; 
 
 const App = () => {
+  const [modalVisible, setModalVisible] = useState(false);
   return (
     <View style={styles.container}>
       <StatusBar barStyle="light-content" />
@@ -9,7 +11,14 @@ const App = () => {
         <Text style={styles.timeText}>11:48 PM</Text>
         <Text style={styles.dateText}>Wednesday, April 17, 2024</Text>
       </View>
-      <TouchableOpacity style={[styles.button, styles.green]}>
+      <ModalComponent 
+        modalVisible={modalVisible} 
+        setModalVisible={setModalVisible} 
+      />
+      <TouchableOpacity 
+        style={[styles.button, styles.green]}
+        onPress={() => setModalVisible(true)}
+      >
         <Text style={styles.buttonText}>New Meeting</Text>
         <Text style={styles.buttonSubtext}>Start an instant meeting</Text>
       </TouchableOpacity>
@@ -20,6 +29,10 @@ const App = () => {
       <TouchableOpacity style={[styles.button, styles.red]}>
         <Text style={styles.buttonText}>View Recordings</Text>
         <Text style={styles.buttonSubtext}>Check out your recordings</Text>
+      </TouchableOpacity>
+      <TouchableOpacity style={[styles.button, styles.yellow]}>
+        <Text style={styles.buttonText}>Join Meeting</Text>
+        <Text style={styles.buttonSubtext}>Via invite link</Text>
       </TouchableOpacity>
     </View>
   );
@@ -63,6 +76,9 @@ const styles = StyleSheet.create({
   },
   red: {
     backgroundColor: '#F44336',
+  },
+  yellow: {
+    backgroundColor: '#F9A90E', 
   },
   buttonText: {
     color: 'white',
